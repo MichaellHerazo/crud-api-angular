@@ -1,0 +1,43 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+
+<div *ngIf="!loading" class="container">
+  <div class="title">
+    <h4>Listado de Items</h4>
+    <input class="form-control me-sm-2 w-25" [(ngModel)]="searchTerm" (input)="filterItems()" type="search" placeholder="Search">
+    <button type="button" class="btn btn-primary" routerLink="/add">
+      Agregar Item
+    </button>
+  </div>
+
+  <table *ngIf="listItems.length > 0" class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Stock</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listItems" class="table-light">
+        <td>{{ item.name }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.price | currency }}</td>
+        <td>{{ item.stock }}</td>
+        <td>
+          <button
+            routerLink="/edit/{{ item.id }}"
+            type="button"
+            class="btn btn-warning"
+          >
+            Editar
+          </button>
+          <button (click)="deleteItem(item.id!)" type="button" class="btn btn-danger ms-2">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h5 *ngIf="listItems.length == 0">No hay productos para mostrar</h5>
+</div>

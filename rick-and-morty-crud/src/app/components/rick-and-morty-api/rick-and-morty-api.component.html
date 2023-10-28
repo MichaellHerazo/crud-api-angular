@@ -1,0 +1,9 @@
+<div *ngIf="character" class="character-info">
+    <div class="character-details">
+      <p>{{ character.name }}</p>
+    </div>
+    <div class="character-image">
+      <img [src]="character.image" alt="{{ character.name }}" />
+    </div>
+  </div>
+  
